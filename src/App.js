@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { domesticSlabs, fixedCharges, categories } from "./tariffs";
+import { smallSlabs, largeSlabs, fixedCharges, categories } from "./tariffs";
 
 export default function App() {
   const [category, setCategory] = useState("Domestic");
@@ -10,14 +10,17 @@ export default function App() {
 
   const calculateCost = () => {
     let remaining = parseFloat(units);
-    if (isNaN(remaining) || remaining < 0) return;
+    if (isNaN(remaining) || remaining <= 0) return;
 
     let cost = 0;
     const details = [];
 
-    for (let slab of domesticSlabs) {
+    // Choose slab set
+    const slabs = remaining <= 500 ? smallSlabs : largeSlabs;
+
+    for (let slab of slabs) {
       if (remaining <= 0) break;
-      const slabUnits = Math.min(remaining, slab.units);
+      const slabUnits = Math.min(remaining, slab.upto - slab.from + 1);
       const slabCost = slabUnits * slab.rate;
       details.push({
         range: `${slab.from}-${slab.upto}`,
@@ -118,7 +121,7 @@ export default function App() {
             </tbody>
           </table>
           <p className="text-xs text-gray-500 mt-2">
-            *Exact TNEB domestic LT‑IA tariff slabs as provided.
+            *Exact TNEB CC Charges calculation with slab split at 500 units.
           </p>
         </div>
       )}
