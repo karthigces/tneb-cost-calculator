@@ -125,6 +125,18 @@ export default function App() {
           </p>
         </div>
       )}
+<footer className="mt-8 p-4 w-full text-center bg-indigo-50 rounded-2xl shadow-inner">
+  <p className="font-bold text-indigo-700 text-sm sm:text-base">
+    🧑‍💻 Developed by <a 
+        href="https://in.linkedin.com/in/karthigces?trk=public_post_feed-actor-name" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="underline hover:text-indigo-900"
+      >
+        Karthi Thangavel
+      </a> &nbsp;|&nbsp; Built with ❤️ using <span className="italic">Vibe Coding</span> for public interest
+  </p>
+</footer>
     </div>
   );
 }
